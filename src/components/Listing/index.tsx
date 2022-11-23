@@ -11,8 +11,6 @@ const Container = styled.section`
 `;
 
 const TitleInput = styled.input`
-	font-family: 'Poppins';
-	font-style: normal;
 	font-weight: 600;
 	font-size: 48px;
 	width: 546px;
@@ -31,8 +29,6 @@ const DescriptionInputContainer = styled.div`
 `;
 
 const DescriptionInput = styled.textarea`
-	font-family: 'Poppins';
-	font-style: normal;
 	font-weight: 500;
 	font-size: 22px;
 	line-height: 36px;
@@ -47,8 +43,6 @@ const DescriptionInput = styled.textarea`
 `;
 
 const DescriptionByteLimit = styled.div`
-	font-family: 'Poppins';
-	font-style: normal;
 	font-weight: 500;
 	font-size: 22px;
 	line-height: 36px;
