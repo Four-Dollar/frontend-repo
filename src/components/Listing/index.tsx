@@ -59,11 +59,13 @@ const DescriptionByteLimit = styled.div`
 `;
 
 export function Listing() {
+	const [description, setDescription] = useState('');
 	const [byte, setByte] = useState(0);
 
 	const onChangeDescription = (
 		event: React.ChangeEvent<HTMLTextAreaElement>,
 	) => {
+		setDescription(event.target.value);
 		setByte(event.target.value.length);
 	};
 
@@ -73,6 +75,7 @@ export function Listing() {
 			<DescriptionInputContainer>
 				<DescriptionInput
 					placeholder="사진 및 상품에 대한 자세한 게시글 내용을 작성해주세요.&#10;(가품 및 판매금지 물품은 게시가 제한될 수 있습니다.)"
+					value={description}
 					onChange={onChangeDescription}
 				></DescriptionInput>
 				<DescriptionByteLimit>{byte} / 1000</DescriptionByteLimit>
