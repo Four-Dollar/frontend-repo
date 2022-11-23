@@ -64,8 +64,13 @@ export function Listing() {
 	const onChangeDescription = (
 		event: React.ChangeEvent<HTMLTextAreaElement>,
 	) => {
-		setDescription(event.target.value);
-		setByte(event.target.value.length);
+		if (byte < 1000) {
+			setDescription(event.target.value);
+			setByte(event.target.value.length);
+		} else if (byte >= 1000) {
+			setDescription((prev) => prev.substring(0, 1000));
+			setByte(999);
+		}
 	};
 
 	return (
