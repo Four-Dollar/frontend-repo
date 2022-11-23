@@ -7,6 +7,7 @@ const Container = styled.header`
 	flex-direction: row;
 	align-items: center;
 	padding: 12px;
+	height: 10vh;
 `;
 const LogoContainer = styled.div`
 	width: fit-content;
