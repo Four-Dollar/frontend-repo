@@ -58,8 +58,8 @@ const DescriptionByteLimit = styled.div`
 `;
 
 const Horizon = styled.hr`
-	width: 5vw;
-	height: 1vh;
+	width: 64px;
+	height: 8px;
 	background-color: #b7b7b7;
 `;
 
