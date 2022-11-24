@@ -10,10 +10,12 @@ const Container = styled.section`
 	height: 90vh;
 `;
 
-const TitleInput = styled.input`
+const TitleInput = styled.textarea`
 	font-weight: 600;
 	font-size: 48px;
 	width: 546px;
+	height: auto;
+	resize: none;
 	outline: none;
 	color: #111111;
 
@@ -54,32 +56,41 @@ const DescriptionByteLimit = styled.div`
 
 export function Listing() {
 	const [title, setTitle] = useState('');
+	const [titleByteCheck, setTitleByteCheck] = useState(0);
 	const [description, setDescription] = useState('');
-	const [byte, setByte] = useState(0);
+	const [descriptionByteCheck, setDescriptionByteCheck] = useState(0);
 
-	const onChangeTitle = (event: React.ChangeEvent<HTMLInputElement>) => {
-		setTitle(event.target.value);
+	const onChangeTitle = (event: React.ChangeEvent<HTMLTextAreaElement>) => {
+		if (titleByteCheck < 50) {
+			setTitle(event.target.value);
+			setTitleByteCheck(event.target.value.length);
+		} else if (titleByteCheck >= 50) {
+			setTitle((prev) => prev.substring(0, 50));
+			setTitleByteCheck(49);
+		}
 	};
 
 	const onChangeDescription = (
 		event: React.ChangeEvent<HTMLTextAreaElement>,
 	) => {
-		if (byte < 1000) {
+		if (descriptionByteCheck < 1000) {
 			setDescription(event.target.value);
-			setByte(event.target.value.length);
-		} else if (byte >= 1000) {
+			setDescriptionByteCheck(event.target.value.length);
+		} else if (descriptionByteCheck >= 1000) {
 			setDescription((prev) => prev.substring(0, 1000));
-			setByte(999);
+			setDescriptionByteCheck(999);
 		}
 	};
 
 	return (
 		<Container>
 			<TitleInput
+				id="title"
 				placeholder="제목을 입력해주세요"
 				value={title}
 				onChange={onChangeTitle}
 				spellCheck={false}
+				rows={1}
 			/>
 			<DescriptionInputContainer>
 				<DescriptionInput
@@ -88,7 +99,9 @@ export function Listing() {
 					onChange={onChangeDescription}
 					spellCheck={false}
 				></DescriptionInput>
-				<DescriptionByteLimit>{byte} / 1000</DescriptionByteLimit>
+				<DescriptionByteLimit>
+					{descriptionByteCheck} / 1000
+				</DescriptionByteLimit>
 			</DescriptionInputContainer>
 		</Container>
 	);
