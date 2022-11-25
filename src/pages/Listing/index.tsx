@@ -5,6 +5,8 @@ import { Horizon } from 'components/Horizon';
 import { TitleInput } from 'components/TitleInput';
 import styled from 'styled-components';
 
+import { DragScaleBar } from 'components';
+
 const Container = styled.section`
 	display: flex;
 	flex-direction: column;
@@ -20,6 +22,7 @@ export function Listing() {
 			<TitleInput />
 			<Horizon />
 			<DescriptionInput />
+			<DragScaleBar></DragScaleBar>
 		</Container>
 	);
 }
