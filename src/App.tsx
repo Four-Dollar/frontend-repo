@@ -1,14 +1,17 @@
 import React from 'react';
-import styled from 'styled-components';
 
-import DragScaleBar from 'components/dragBar/DragScaleBar';
-import { Header } from 'components';
+import { Header, GlobalStyle } from 'components';
+import { Listing } from 'pages';
+import { Routes, Route } from 'react-router-dom';
 
 function App() {
 	return (
 		<>
-			<DragScaleBar></DragScaleBar>
+			<GlobalStyle />
 			<Header />
+			<Routes>
+				<Route path="/listing" element={<Listing />} />
+			</Routes>
 		</>
 	);
 }

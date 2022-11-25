@@ -7,6 +7,7 @@ const Container = styled.header`
 	flex-direction: row;
 	align-items: center;
 	padding: 12px;
+	height: 10vh;
 `;
 const LogoContainer = styled.div`
 	width: fit-content;
@@ -16,17 +17,13 @@ const LogoContainer = styled.div`
 	gap: 4px;
 `;
 const LogoText = styled.div`
-	font-family: 'Poppins';
-	font-style: normal;
-	font-weight: 900;
+	font-weight: 800;
 	font-size: 22px;
 	line-height: 42px;
 	letter-spacing: 0.05em;
 	color: #000000;
 `;
 const UserIdInput = styled.input`
-	font-family: 'Poppins';
-	font-style: normal;
 	font-weight: 500;
 	font-size: 18px;
 	line-height: 36px;

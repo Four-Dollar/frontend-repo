@@ -1,6 +1,5 @@
-import { mainModule } from 'process';
 import React, { useState, MouseEvent } from 'react';
-import styled, { css } from 'styled-components';
+import styled from 'styled-components';
 
 const Deadline = styled.p`
 	position: absolute;
@@ -59,7 +58,7 @@ const DeadlineDay = styled.span`
 		margin-right: 0.2em;
 	}
 `;
-const DragScaleBar = () => {
+export const DragScaleBar = () => {
 	const [value, setValue] = useState(0);
 
 	const changeWidth = (event: MouseEvent<HTMLInputElement>) => {
@@ -92,5 +91,3 @@ const DragScaleBar = () => {
 		</>
 	);
 };
-
-export default DragScaleBar;
