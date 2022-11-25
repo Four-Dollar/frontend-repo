@@ -17,9 +17,8 @@ const TextArea = styled.textarea<StyleProps>`
 			font-weight: 500;
 			font-size: 22px;
 			line-height: 36px;
-			height: 300px;
 			color: #111111;
-
+			flex-grow: 1;
 			&::placeholder {
 				color: #a2a2a2;
 			}
