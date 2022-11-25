@@ -1,37 +1,37 @@
 import React, { useState } from 'react';
-import styled, { css } from 'styled-components';
+import styled from 'styled-components';
+
+const Container = styled.div`
+	display: flex;
+	padding-top: 10px;
+	align-items: center;
+`;
 
 const Price = styled.input`
-	position: absolute;
-	margin-top: 2.5em;
-	margin-left: 8em;
-	font-size: 30px;
-	width: 9em;
-	font-color: #6f6f6f;
-	font-family: 'Poppins', sans-serif;
-	font-weight: bolder;
+	font-size: 32px;
+	color: #6f6f6f;
+	font-weight: bold;
 	outline: none;
 	::-webkit-inner-spin-button {
 		-webkit-appearance: none;
 		margin: 0;
 	}
 `;
+
 const Register = styled.button`
-	position: absolute;
-	margin-left: 27em;
-	margin-top: 3.5em;
-	padding: 0.5em;
 	background-color: black;
 	color: white;
-	font-size: 20px;
+	font-size: 22px;
 	border-radius: 10px;
-	font-family: 'Poppins', sans-serif;
 	font-weight: bold;
 	box-shadow: 0px 2px 3px gray;
 	text-align: center;
+	padding: 16px;
+	height: fit-content;
+	margin-left: auto;
 `;
 
-const InputPrice = () => {
+export const InputPrice = () => {
 	const [price, setPrice] = useState('');
 
 	const onChangePrice = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -45,17 +45,15 @@ const InputPrice = () => {
 	};
 
 	return (
-		<>
+		<Container>
 			<Price
 				type="text"
 				placeholder="금액을 입력해주세요"
 				onChange={onChangePrice}
 				value={price}
-				maxLength={10}
+				maxLength={11}
 			></Price>
 			<Register>상품 등록하기</Register>
-		</>
+		</Container>
 	);
 };
-
-export default InputPrice;
