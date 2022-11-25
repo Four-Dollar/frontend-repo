@@ -1,4 +1,4 @@
-import React, { useState, MouseEvent } from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
 
 const Container = styled.div`
@@ -58,7 +58,7 @@ const DeadlineDay = styled.span`
 export const DragScaleBar = () => {
 	const [value, setValue] = useState(0);
 
-	const changeWidth = (event: MouseEvent<HTMLInputElement>) => {
+	const changeWidth = (event: React.ChangeEvent<HTMLInputElement>) => {
 		event.preventDefault();
 		const target = event.target as HTMLInputElement;
 		setValue(parseInt(target.value));
@@ -81,7 +81,7 @@ export const DragScaleBar = () => {
 					max={MAX}
 					defaultValue={value}
 					step="1"
-					onMouseUp={changeWidth}
+					onChange={changeWidth}
 				/>
 				<DeadlineArea className="last">
 					<DeadlineDay className="lastDay">+10</DeadlineDay>Day
