@@ -1,69 +1,94 @@
-import Arrow from 'components/Button/Arrow';
-import Pagination from 'components/ImagePagination/pagination';
-import React, { ChangeEvent, ChangeEventHandler, HTMLAttributes, ReactNode, useEffect, useRef, useState } from 'react';
-import styled from "styled-components";
-import { isMainThread } from 'worker_threads';
+import React, { ChangeEvent, useState } from 'react';
+import styled from 'styled-components';
 
-export default function ImageInput  (){
-    const [images, setImages] = useState<File>();
-    const [preview, setPreview] = useState<string>("");
-    const [pgimages, setpgImages] = useState<File>();
-    const [pgpreview, setpgPreview] = useState<string>("");
-    
-    const [pg, setPg] = useState(0);
+const Container = styled.div`
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	gap: 8px;
+`;
+const ImagePreview = styled.img`
+	width: 60%;
+	height: 60%;
+	border-radius: 16px;
+`;
 
-    useEffect(()=>{
-        if(images){
-            const reader = new FileReader();
-            reader.onloadend =()=>{
-                setPreview(reader.result as string);
-            };
-            reader.readAsDataURL(images);
-        }
-        else{
-            setPreview("");
-        }
-    })
-    const changeHandler = (e:ChangeEvent<HTMLInputElement>) => {
-    const file = e.target.files;
-    
-    const imgs = [];
-    let first;
-    
-    if(file){
-    for(let i=1; i<file?.length;i++){ 
-    if(file){
-        setImages(file[0]);
-        imgs.push(file[i]);
-        console.log(file);
-    }
-    if(images){
-    const reader = new FileReader();
-            reader.onloadend =()=>{
-            setPreview(reader.result as string);
-            };
-            reader.readAsDataURL(images);
-            //reader.readAsDataURL(imgs[i]);
-        }
-        else{
-        setPreview("");
-        }
-    }
-    }
-}
+const ButtonContainer = styled.div`
+	margin-left: auto;
+`;
 
-    return(
-        <div className="flex flex-col">
-        <img id="imagesPreview" className="flex rounded-xl" src={preview} width="300px" height="400px"></img>
-        <div className="flex p-4 flex-row">
-        <Arrow left ></Arrow>
-        <Pagination src={""}></Pagination>
-        <Pagination src={""}></Pagination>
-        <Pagination src={""}></Pagination>
-        <Arrow right></Arrow>
-        </div>
-        <label className="flex pt-2 pl-4 w-32 h-12 text-3xl rounded-lg bg-black text-white"htmlFor="imgInput">업로드</label>
-        <input id="imgInput" type = "file"  accept="image/*" className="hidden" multiple onChange={changeHandler}/>  
-        </div>
-    )
+const ButtonLabel = styled.label`
+	display: block;
+	background-color: black;
+	color: white;
+	font-size: 22px;
+	border-radius: 10px;
+	font-weight: bold;
+	box-shadow: 0px 2px 3px gray;
+	text-align: center;
+	padding: 16px;
+	height: fit-content;
+`;
+
+const ButtonInput = styled.input``;
+
+const PagenationContainer = styled.div`
+	display: flex;
+	justify-content: center;
+	gap: 10px;
+`;
+
+const PagenationImage = styled.img`
+	width: 20%;
+	height: 20%;
+	border-radius: 16px;
+`;
+
+export function ImageInput() {
+	const [imageSrc, setImageSrc] = useState('');
+	const [imageList, setImageList] = useState<string[]>([]);
+
+	const changeHandler = (event: ChangeEvent<HTMLInputElement>) => {
+		if (event.target.files !== null) {
+			for (const file of Array.from(event.target?.files)) {
+				const reader = new FileReader();
+				reader.readAsDataURL(file);
+				reader.onload = (event) => {
+					const result = event.target?.result as string;
+					setImageList((prev) => [...prev, result]);
+				};
+			}
+		}
+	};
+
+	const onClickImage = (event: React.MouseEvent<HTMLImageElement>) => {
+		setImageSrc((event.target as HTMLImageElement).src);
+	};
+
+	return (
+		<Container>
+			<ImagePreview src={imageSrc} alt="preview-image" />
+			<PagenationContainer>
+				{imageList?.map((item) => (
+					<PagenationImage
+						key={item}
+						src={item}
+						alt={item}
+						onClick={onClickImage}
+					/>
+				))}
+			</PagenationContainer>
+			<ButtonContainer>
+				<ButtonLabel htmlFor="imgInput">업로드</ButtonLabel>
+				<ButtonInput
+					id="imgInput"
+					type="file"
+					accept="image/*"
+					className="hidden"
+					multiple
+					onChange={changeHandler}
+				/>
+			</ButtonContainer>
+		</Container>
+	);
 }
