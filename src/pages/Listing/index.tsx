@@ -1,11 +1,13 @@
 import React from 'react';
-
-import { DescriptionInput } from 'components/DescriptionInput';
-import { Horizon } from 'components/Horizon';
-import { TitleInput } from 'components/TitleInput';
 import styled from 'styled-components';
 
-import { DragScaleBar, InputPrice } from 'components';
+import {
+	DescriptionInput,
+	TitleInput,
+	Horizon,
+	DragScaleBar,
+	InputPrice,
+} from 'components';
 
 const Container = styled.section`
 	display: flex;
