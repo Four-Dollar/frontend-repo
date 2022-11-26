@@ -1,11 +1,17 @@
-import { Header } from 'components';
 import React from 'react';
-import styled from 'styled-components';
+import { Header, GlobalStyle, Dots } from 'components';
+import { Listing } from 'pages';
+import { Routes, Route } from 'react-router-dom';
 
 function App() {
 	return (
 		<>
+			<GlobalStyle />
 			<Header />
+			<Routes>
+				<Route path="/listing" element={<Listing />} />
+			</Routes>
+			<Dots />
 		</>
 	);
 }
