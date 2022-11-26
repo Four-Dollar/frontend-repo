@@ -12,7 +12,7 @@ import {
 const Container = styled.section`
 	display: flex;
 	flex-direction: column;
-	padding: 64px;
+	padding: 32px 40px 64px 72px;
 	gap: 8px;
 	width: fit-content;
 	height: 90vh;

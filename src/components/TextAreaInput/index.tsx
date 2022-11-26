@@ -28,12 +28,12 @@ const TextArea = styled.textarea<StyleProps>`
 		props.componentType === 'titleInput' &&
 		css`
 			font-weight: 600;
-			font-size: 48px;
+			font-size: 40px;
 			overflow: hidden;
 			color: #111111;
 
 			&::placeholder {
-				color: #111111;
+				color: #a2a2a2;
 			}
 		`}
 `;
