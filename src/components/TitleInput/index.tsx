@@ -11,8 +11,10 @@ const Container = styled.div`
 `;
 
 export const TitleInput = () => {
-	const title = useListingStore((state) => state.title);
-	const setTitle = useListingStore((state) => state.setTitle);
+	const [title, setTitle] = useListingStore((state) => [
+		state.title,
+		state.setTitle,
+	]);
 	const [titleByteCheck, setTitleByteCheck] = useState(0);
 
 	const onChangeTitle = (event: React.ChangeEvent<HTMLTextAreaElement>) => {

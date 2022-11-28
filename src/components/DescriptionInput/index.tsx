@@ -20,8 +20,10 @@ const DescriptionByteLimit = styled.div`
 `;
 
 export const DescriptionInput = () => {
-	const description = useListingStore((state) => state.description);
-	const setDescription = useListingStore((state) => state.setDescription);
+	const [description, setDescription] = useListingStore((state) => [
+		state.description,
+		state.setDescription,
+	]);
 	const [descriptionByteCheck, setDescriptionByteCheck] = useState(0);
 
 	const onChangeDescription = (
