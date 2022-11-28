@@ -3,6 +3,7 @@ import React, { useState } from 'react';
 import { TextAreaInput } from 'components/TextAreaInput';
 
 import styled from 'styled-components';
+import { useListingStore } from 'stores';
 
 const Container = styled.div`
 	width: 546px;
@@ -10,7 +11,8 @@ const Container = styled.div`
 `;
 
 export const TitleInput = () => {
-	const [title, setTitle] = useState('');
+	const title = useListingStore((state) => state.title);
+	const setTitle = useListingStore((state) => state.setTitle);
 	const [titleByteCheck, setTitleByteCheck] = useState(0);
 
 	const onChangeTitle = (event: React.ChangeEvent<HTMLTextAreaElement>) => {
@@ -20,7 +22,7 @@ export const TitleInput = () => {
 			setTitle(event.target.value);
 			setTitleByteCheck(event.target.value.length);
 		} else if (titleByteCheck >= 50) {
-			setTitle((prev) => prev.substring(0, 50));
+			setTitle(title.substring(0, 50));
 			setTitleByteCheck(49);
 		}
 	};
