@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { TextAreaInput } from 'components/TextAreaInput';
 import styled from 'styled-components';
+import { useListingStore } from 'stores';
 
 const Container = styled.div`
 	display: flex;
@@ -19,7 +20,10 @@ const DescriptionByteLimit = styled.div`
 `;
 
 export const DescriptionInput = () => {
-	const [description, setDescription] = useState('');
+	const [description, setDescription] = useListingStore((state) => [
+		state.description,
+		state.setDescription,
+	]);
 	const [descriptionByteCheck, setDescriptionByteCheck] = useState(0);
 
 	const onChangeDescription = (
@@ -29,7 +33,7 @@ export const DescriptionInput = () => {
 			setDescription(event.target.value);
 			setDescriptionByteCheck(event.target.value.length);
 		} else if (descriptionByteCheck >= 1000) {
-			setDescription((prev) => prev.substring(0, 1000));
+			setDescription(description.substring(0, 1000));
 			setDescriptionByteCheck(999);
 		}
 	};

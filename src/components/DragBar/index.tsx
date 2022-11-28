@@ -1,4 +1,5 @@
-import React, { useState } from 'react';
+import React from 'react';
+import { useListingStore } from 'stores';
 import styled from 'styled-components';
 
 const Container = styled.div`
@@ -56,7 +57,10 @@ const DeadlineDay = styled.span`
 	}
 `;
 export const DragScaleBar = () => {
-	const [value, setValue] = useState(0);
+	const [value, setValue] = useListingStore((state) => [
+		state.deadline,
+		state.setDeadline,
+	]);
 
 	const changeWidth = (event: React.ChangeEvent<HTMLInputElement>) => {
 		event.preventDefault();

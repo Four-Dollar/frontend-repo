@@ -1,4 +1,5 @@
-import React, { useState } from 'react';
+import React from 'react';
+import { useListingStore } from 'stores';
 import styled from 'styled-components';
 
 const Container = styled.div`
@@ -32,7 +33,11 @@ const Register = styled.button`
 `;
 
 export const InputPrice = () => {
-	const [price, setPrice] = useState('');
+	const [price, setPrice] = useListingStore((state) => [
+		state.price,
+		state.setPrice,
+	]);
+	// const [price, setPrice] = useState('');
 
 	const onChangePrice = (event: React.ChangeEvent<HTMLInputElement>) => {
 		const target = event.target.value;
