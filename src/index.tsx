@@ -4,6 +4,11 @@ import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 import { BrowserRouter as Router } from 'react-router-dom';
+import { worker } from 'apis/mocks/browser';
+
+if (process.env.NODE_ENV === 'development') {
+	worker.start();
+}
 
 const root = ReactDOM.createRoot(
 	document.getElementById('root') as HTMLElement,
