@@ -4,7 +4,7 @@ import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 import { BrowserRouter as Router } from 'react-router-dom';
-import { worker } from 'apis/mocks/browser';
+import { worker } from 'api/mocks/browser';
 
 if (process.env.NODE_ENV === 'development') {
 	worker.start();

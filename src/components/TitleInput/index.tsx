@@ -1,13 +1,23 @@
 import React, { useState } from 'react';
-
-import { TextAreaInput } from 'components/TextAreaInput';
-
 import styled from 'styled-components';
+
+import { TextArea } from 'components/TextArea';
 import { useListingStore } from 'stores';
 
 const Container = styled.div`
 	width: 546px;
 	height: fit-content;
+`;
+
+const TitleTextArea = styled(TextArea)`
+	font-weight: 600;
+	font-size: 40px;
+	overflow: hidden;
+	color: #111111;
+
+	&::placeholder {
+		color: #a2a2a2;
+	}
 `;
 
 export const TitleInput = () => {
@@ -38,10 +48,9 @@ export const TitleInput = () => {
 
 	return (
 		<Container>
-			<TextAreaInput
+			<TitleTextArea
 				rows={1}
-				componentType="titleInput"
-				placeHolder="제목을 입력해주세요"
+				placeholder="제목을 입력해주세요"
 				value={title}
 				onChange={onChangeTitle}
 			/>
