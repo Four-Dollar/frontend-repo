@@ -2,47 +2,44 @@ import create from 'zustand';
 import { devtools, persist } from 'zustand/middleware';
 
 interface ListingState {
-	userid: number;
+	userId: number;
 	title: string;
 	description: string;
-	price: string;
+	bid: string;
 	deadline: number;
-	pictures: object;
+	pictures: File[];
+
 	setUserId: (userid: number) => void;
 	setTitle: (title: string) => void;
 	setDescription: (description: string) => void;
-	setPrice: (price: string) => void;
+	setBid: (bid: string) => void;
 	setDeadline: (deadline: number) => void;
-	setPictures: (pictures: FileList) => void;
-	// register: (title: string, description: string, price: number) => void;
+	setPictures: (pictures: File[]) => void;
 }
 
 export const useListingStore = create<ListingState>()(
 	devtools(
 		persist(
 			(set) => ({
-				userid: 0,
+				userId: 0,
 				title: '',
 				description: '',
-				price: '',
+				bid: '',
 				deadline: 0,
-				pictures: {},
-				setUserId: (userid: number) => set(() => ({ userid: userid })),
+				pictures: [],
+
+				setUserId: (userId: number) => set(() => ({ userId: userId })),
+
 				setTitle: (title: string) => set(() => ({ title: title })),
+
 				setDescription: (description: string) =>
 					set(() => ({ description: description })),
-				setPrice: (price: string) => set(() => ({ price: price })),
-				setDeadline: (deadline: number) => set(() => ({ deadline: deadline })),
-				setPictures: (pictures: FileList) =>
-					set(() => ({ pictures: pictures })),
-				// register: (title, description, price) =>
-				// 	set((state) => {
-				// 		state.title = title;
-				// 		state.description = description;
-				// 		state.price = price;
 
-				// 		return state;
-				// 	}),
+				setBid: (bid: string) => set(() => ({ bid: bid })),
+
+				setDeadline: (deadline: number) => set(() => ({ deadline: deadline })),
+
+				setPictures: (pictures: File[]) => set(() => ({ pictures: pictures })),
 			}),
 			{
 				name: 'listing-storage',
