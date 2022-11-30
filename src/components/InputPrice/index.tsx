@@ -37,7 +37,7 @@ const Register = styled.button`
 export const InputPrice = () => {
 	const listingStore = useListingStore();
 
-	const [bid, setBid] = useListingStore((state) => [state.bid, state.setBid]);
+	const [bid, setBid] = [listingStore.bid, listingStore.setBid];
 
 	const onChangeBid = (event: React.ChangeEvent<HTMLInputElement>) => {
 		const target = event.target.value;
@@ -53,7 +53,6 @@ export const InputPrice = () => {
 		const userId = listingStore.userId;
 		const title = listingStore.title;
 		const description = listingStore.description;
-		const bid = listingStore.bid;
 		const deadline = listingStore.deadline;
 		const pictures = listingStore.pictures;
 
