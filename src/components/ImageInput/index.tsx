@@ -1,6 +1,8 @@
 import React, { ChangeEvent, useState } from 'react';
 import { Removebg } from 'removebg';
+import { useListingStore } from 'stores';
 import styled from 'styled-components';
+
 const Container = styled.div`
 	display: flex;
 	flex-direction: column;
@@ -83,15 +85,22 @@ export function ImageInput() {
 	const [pageNum,setPageNum] = useState(1);
 	const MAX_PAGE = Math.ceil(imageList.length/3);
 	//imageView.length = 3; 
-	const changeHandler = (event: ChangeEvent<HTMLInputElement>) => {	
+	const [imageFileList, setImageFileList] = useListingStore((state) => [
+		state.pictures,
+		state.setPictures,
+	]);
+
+	const changeHandler = (event: ChangeEvent<HTMLInputElement>) => {
 		if (event.target.files !== null) {
-			for (const file of Array.from(event.target?.files)) {
-				const reader = new FileReader();	 
+			// eslint-disable-next-line prefer-const
+			for (let file of Array.from(event.target?.files)) {
+				const reader = new FileReader();
 				reader.readAsDataURL(file);
 				reader.onload = (event) => {
 					const source = event.target?.result as string;
 					//const finalResult = Removebg(source);
 					setImageList((prev) => [...prev,source]);
+          setImageFileList([...imageFileList, file]);
 				};
 			}
 		}

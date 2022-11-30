@@ -1,6 +1,8 @@
 import React from 'react';
 import { useListingStore } from 'stores';
 import styled from 'styled-components';
+import { apiUrl } from 'common/apiUrl';
+import axios from 'axios';
 
 const Container = styled.div`
 	display: flex;
@@ -33,20 +35,42 @@ const Register = styled.button`
 `;
 
 export const InputPrice = () => {
-	const [price, setPrice] = useListingStore((state) => [
-		state.price,
-		state.setPrice,
-	]);
-	// const [price, setPrice] = useState('');
+	const listingStore = useListingStore();
 
-	const onChangePrice = (event: React.ChangeEvent<HTMLInputElement>) => {
+	const [bid, setBid] = [listingStore.bid, listingStore.setBid];
+
+	const onChangeBid = (event: React.ChangeEvent<HTMLInputElement>) => {
 		const target = event.target.value;
 		const inputNum = target;
 		const testnum = inputNum
 			.replace(/[^\d]+/g, '')
 			.replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ',');
 
-		setPrice(testnum);
+		setBid(testnum);
+	};
+
+	const callListingApi = () => {
+		const userId = listingStore.userId;
+		const title = listingStore.title;
+		const description = listingStore.description;
+		const deadline = listingStore.deadline;
+		const pictures = listingStore.pictures;
+
+		const formData = new FormData();
+
+		formData.append('userId', String(userId));
+		formData.append('title', title);
+		formData.append('description', description);
+		// eslint-disable-next-line prefer-const
+		for (let file of pictures) {
+			formData.append('file', file);
+		}
+		formData.append('bid', bid.replace(/,/g, ''));
+		formData.append('deadline', String(deadline));
+
+		axios
+			.post(`${apiUrl}/used-goods`, formData)
+			.then((res) => console.log(res));
 	};
 
 	return (
@@ -54,11 +78,11 @@ export const InputPrice = () => {
 			<Price
 				type="text"
 				placeholder="금액을 입력해주세요"
-				onChange={onChangePrice}
-				value={price}
+				onChange={onChangeBid}
+				value={bid}
 				maxLength={11}
 			></Price>
-			<Register>상품 등록하기</Register>
+			<Register onClick={callListingApi}>상품 등록하기</Register>
 		</Container>
 	);
 };

@@ -1,5 +1,5 @@
 import React from 'react';
-import { Header, GlobalStyle, Dots } from 'components';
+import { Header, GlobalStyle, Dots } from 'components/common';
 import { Listing } from 'pages';
 import { Routes, Route } from 'react-router-dom';
 
