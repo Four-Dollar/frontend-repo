@@ -1,6 +1,8 @@
 import React from 'react';
 import { useListingStore } from 'stores';
 import styled from 'styled-components';
+import { apiUrl } from 'common/apiUrl';
+import axios from 'axios';
 
 const Container = styled.div`
 	display: flex;
@@ -33,6 +35,8 @@ const Register = styled.button`
 `;
 
 export const InputPrice = () => {
+	const listingStore = useListingStore();
+
 	const [price, setPrice] = useListingStore((state) => [
 		state.price,
 		state.setPrice,
@@ -49,6 +53,22 @@ export const InputPrice = () => {
 		setPrice(testnum);
 	};
 
+	const callListingApi = () => {
+		const title = listingStore.title;
+		const description = listingStore.description;
+		const price = listingStore.price;
+		const deadline = listingStore.deadline;
+
+		axios
+			.post(`${apiUrl}/used-goods`, {
+				title: title,
+				description: description,
+				bid: price,
+				deadline: deadline,
+			})
+			.then((res) => console.log(res));
+	};
+
 	return (
 		<Container>
 			<Price
@@ -58,7 +78,7 @@ export const InputPrice = () => {
 				value={price}
 				maxLength={11}
 			></Price>
-			<Register>상품 등록하기</Register>
+			<Register onClick={callListingApi}>상품 등록하기</Register>
 		</Container>
 	);
 };
