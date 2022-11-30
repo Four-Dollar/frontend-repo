@@ -1,6 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import { ReactComponent as Logo } from 'assets/images/Logo.svg';
+import { useListingStore } from 'stores';
 
 const Container = styled.header`
 	display: flex;
@@ -33,13 +34,22 @@ const UserIdInput = styled.input`
 `;
 
 export function Header() {
+	const [userid, setUserId] = useListingStore((state) => [
+		state.userid,
+		state.setUserId,
+	]);
 	return (
 		<Container>
 			<LogoContainer>
 				<Logo />
 				<LogoText>FourDollar</LogoText>
 			</LogoContainer>
-			<UserIdInput placeholder="UserId 입력 (임시)" />
+			<UserIdInput
+				type="number"
+				value={userid}
+				placeholder="UserId 입력 (임시)"
+				onChange={(event) => setUserId(Number(event.target.value))}
+			/>
 		</Container>
 	);
 }

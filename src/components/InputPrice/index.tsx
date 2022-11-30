@@ -54,17 +54,21 @@ export const InputPrice = () => {
 	};
 
 	const callListingApi = () => {
+		const userid = listingStore.userid;
 		const title = listingStore.title;
 		const description = listingStore.description;
 		const price = listingStore.price;
 		const deadline = listingStore.deadline;
+		const pictures = listingStore.pictures;
 
 		axios
 			.post(`${apiUrl}/used-goods`, {
+				userid: Number(userid),
 				title: title,
 				description: description,
-				bid: price,
+				bid: Number(price.replace(/,/g, '')),
 				deadline: deadline,
+				pictures: pictures,
 			})
 			.then((res) => console.log(res));
 	};

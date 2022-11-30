@@ -1,4 +1,5 @@
 import React, { ChangeEvent, useState } from 'react';
+import { useListingStore } from 'stores';
 import styled from 'styled-components';
 
 const Container = styled.div`
@@ -47,9 +48,14 @@ const PagenationImage = styled.img`
 export function ImageInput() {
 	const [imageSrc, setImageSrc] = useState('');
 	const [imageList, setImageList] = useState<string[]>([]);
+	const [imageFileList, setImageFileList] = useListingStore((state) => [
+		state.pictures,
+		state.setPictures,
+	]);
 
 	const changeHandler = (event: ChangeEvent<HTMLInputElement>) => {
 		if (event.target.files !== null) {
+			setImageFileList(event.target.files);
 			for (const file of Array.from(event.target?.files)) {
 				const reader = new FileReader();
 				reader.readAsDataURL(file);
