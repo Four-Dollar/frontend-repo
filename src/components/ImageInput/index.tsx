@@ -55,8 +55,9 @@ export function ImageInput() {
 
 	const changeHandler = (event: ChangeEvent<HTMLInputElement>) => {
 		if (event.target.files !== null) {
-			setImageFileList(event.target.files);
 			for (const file of Array.from(event.target?.files)) {
+				setImageFileList([...imageFileList, file]);
+
 				const reader = new FileReader();
 				reader.readAsDataURL(file);
 				reader.onload = (event) => {
