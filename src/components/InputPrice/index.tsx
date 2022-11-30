@@ -37,35 +37,39 @@ const Register = styled.button`
 export const InputPrice = () => {
 	const listingStore = useListingStore();
 
-	const [price, setPrice] = useListingStore((state) => [
-		state.price,
-		state.setPrice,
-	]);
-	// const [price, setPrice] = useState('');
+	const [bid, setBid] = [listingStore.bid, listingStore.setBid];
 
-	const onChangePrice = (event: React.ChangeEvent<HTMLInputElement>) => {
+	const onChangeBid = (event: React.ChangeEvent<HTMLInputElement>) => {
 		const target = event.target.value;
 		const inputNum = target;
 		const testnum = inputNum
 			.replace(/[^\d]+/g, '')
 			.replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ',');
 
-		setPrice(testnum);
+		setBid(testnum);
 	};
 
 	const callListingApi = () => {
+		const userId = listingStore.userId;
 		const title = listingStore.title;
 		const description = listingStore.description;
-		const price = listingStore.price;
 		const deadline = listingStore.deadline;
+		const pictures = listingStore.pictures;
+
+		const formData = new FormData();
+
+		formData.append('userId', String(userId));
+		formData.append('title', title);
+		formData.append('description', description);
+		// eslint-disable-next-line prefer-const
+		for (let file of pictures) {
+			formData.append('file', file);
+		}
+		formData.append('bid', bid.replace(/,/g, ''));
+		formData.append('deadline', String(deadline));
 
 		axios
-			.post(`${apiUrl}/used-goods`, {
-				title: title,
-				description: description,
-				bid: price,
-				deadline: deadline,
-			})
+			.post(`${apiUrl}/used-goods`, formData)
 			.then((res) => console.log(res));
 	};
 
@@ -74,8 +78,8 @@ export const InputPrice = () => {
 			<Price
 				type="text"
 				placeholder="금액을 입력해주세요"
-				onChange={onChangePrice}
-				value={price}
+				onChange={onChangeBid}
+				value={bid}
 				maxLength={11}
 			></Price>
 			<Register onClick={callListingApi}>상품 등록하기</Register>
