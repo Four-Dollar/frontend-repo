@@ -43,6 +43,7 @@ export const useListingStore = create<ListingState>()(
 			}),
 			{
 				name: 'listing-storage',
+				getStorage: () => sessionStorage,
 			},
 		),
 	),

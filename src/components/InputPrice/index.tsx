@@ -61,7 +61,8 @@ export const InputPrice = () => {
 		formData.append('userId', String(userId));
 		formData.append('title', title);
 		formData.append('description', description);
-		for (const file of pictures) {
+		// eslint-disable-next-line prefer-const
+		for (let file of pictures) {
 			formData.append('file', file);
 		}
 		formData.append('bid', bid.replace(/,/g, ''));

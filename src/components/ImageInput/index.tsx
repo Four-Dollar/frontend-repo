@@ -55,7 +55,8 @@ export function ImageInput() {
 
 	const changeHandler = (event: ChangeEvent<HTMLInputElement>) => {
 		if (event.target.files !== null) {
-			for (const file of Array.from(event.target?.files)) {
+			// eslint-disable-next-line prefer-const
+			for (let file of Array.from(event.target?.files)) {
 				setImageFileList([...imageFileList, file]);
 
 				const reader = new FileReader();
