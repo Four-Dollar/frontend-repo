@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
 
-import { TextArea } from 'components/TextArea';
+import { TextArea } from 'components/common';
 import { useListingStore } from 'stores';
 
 const Container = styled.div`

@@ -4,11 +4,12 @@ import styled from 'styled-components';
 import {
 	DescriptionInput,
 	TitleInput,
-	Horizon,
 	DragScaleBar,
 	InputPrice,
 	ImageInput,
 } from 'components';
+
+import { Horizon } from 'components/common';
 
 const Container = styled.main`
 	display: flex;
