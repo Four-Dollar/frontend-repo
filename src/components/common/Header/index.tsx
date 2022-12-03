@@ -34,8 +34,8 @@ const UserIdInput = styled.input`
 `;
 
 export function Header() {
-	const [userid, setUserId] = useListingStore((state) => [
-		state.userid,
+	const [userId, setUserId] = useListingStore((state) => [
+		state.userId,
 		state.setUserId,
 	]);
 	return (
@@ -46,7 +46,7 @@ export function Header() {
 			</LogoContainer>
 			<UserIdInput
 				type="number"
-				value={userid}
+				value={userId}
 				placeholder="UserId 입력 (임시)"
 				onChange={(event) => setUserId(Number(event.target.value))}
 			/>
