@@ -13,6 +13,7 @@ import { Horizon } from 'components/common';
 
 const Container = styled.main`
 	display: flex;
+	height: 90vh;
 `;
 
 const LeftContainer = styled.section`
@@ -20,14 +21,14 @@ const LeftContainer = styled.section`
 	flex-direction: column;
 	padding: 32px 40px 64px 72px;
 	gap: 8px;
-	width: 50vw;
-	height: 90vh;
+	width: 50%;
+	height: 100%;
 `;
 
 const RightContainer = styled.section`
 	padding: 32px 72px 64px 40px;
-	width: 50vw;
-	height: 90vh;
+	width: 50%;
+	height: 100%;
 `;
 
 export function Listing() {
