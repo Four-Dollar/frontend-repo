@@ -134,7 +134,7 @@ export function ImageInput() {
 					const source = event.target?.result as string;
 					//const finalResult = Removebg(source);
 					setImageList((prev) => [...prev, source]);
-					setImageFileList([...imageFileList, file]);
+					setImageFileList(file);
 				};
 			}
 		}

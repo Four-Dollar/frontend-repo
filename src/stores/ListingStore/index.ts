@@ -14,7 +14,7 @@ interface ListingState {
 	setDescription: (description: string) => void;
 	setBid: (bid: string) => void;
 	setDeadline: (deadline: number) => void;
-	setPictures: (pictures: File[]) => void;
+	setPictures: (pictures: File) => void;
 }
 
 export const useListingStore = create<ListingState>()(
@@ -39,7 +39,8 @@ export const useListingStore = create<ListingState>()(
 
 				setDeadline: (deadline: number) => set(() => ({ deadline: deadline })),
 
-				setPictures: (pictures: File[]) => set(() => ({ pictures: pictures })),
+				setPictures: (pictures: File) =>
+					set((state) => ({ pictures: [...state.pictures, pictures] })),
 			}),
 			{
 				name: 'listing-storage',
