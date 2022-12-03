@@ -3,6 +3,7 @@ import { useListingStore } from 'stores';
 import styled from 'styled-components';
 import { ReactComponent as LeftArrow } from 'assets/images/arrow-left.svg';
 import { ReactComponent as RightArrow } from 'assets/images/arrow-right.svg';
+import { PreviewModal } from 'components/PreviewModal';
 
 const Container = styled.div`
 	display: flex;
@@ -13,13 +14,13 @@ const Container = styled.div`
 `;
 
 const ImagePreviewContainer = styled.div`
-	max-width: 80%;
-	min-width: 80%;
+	display: flex;
+	justify-content: center;
 	border-radius: 16px;
-	background: #d9d9d9;
 	filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
 	overflow: auto;
 	margin-bottom: auto;
+	max-width: 90%;
 `;
 
 const ImagePreview = styled.img`
@@ -52,8 +53,8 @@ const PagenationContainer = styled.div`
 	align-items: center;
 	gap: 8px;
 	filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
-	max-width: 100%;
-	min-width: 100%;
+	max-width: 80%;
+	min-width: 80%;
 `;
 
 const PagenationImageContainer = styled.div`
@@ -121,6 +122,8 @@ export function ImageInput() {
 		state.setPictures,
 	]);
 
+	const [triggerModal, setTriggerModal] = useState(false);
+
 	const changeHandler = (event: ChangeEvent<HTMLInputElement>) => {
 		if (event.target.files !== null) {
 			// eslint-disable-next-line prefer-const
@@ -159,12 +162,28 @@ export function ImageInput() {
 		setImageSrc((event.target as HTMLImageElement).src);
 	};
 
+	const onClickPreview = () => {
+		setTriggerModal(true);
+	};
+
 	return (
 		<Container>
+			{triggerModal ? (
+				<PreviewModal
+					src={imageSrc}
+					alt=""
+					onClick={() => {
+						setTriggerModal(false);
+					}}
+				/>
+			) : null}
 			<ImagePreviewContainer>
-				<ImagePreview src={imageSrc} />
+				<ImagePreview
+					src={imageSrc}
+					onClick={onClickPreview}
+					alt="preview-image"
+				/>
 			</ImagePreviewContainer>
-
 			<PagenationContainer>
 				<PagenationButton left onClick={onClickPrev}>
 					<LeftArrow />
@@ -180,7 +199,6 @@ export function ImageInput() {
 					<RightArrow />
 				</PagenationButton>
 			</PagenationContainer>
-
 			<UploadContainer>
 				<ImageGuide>
 					단색 배경에 찍은 사진을 추가해주세요! <br />

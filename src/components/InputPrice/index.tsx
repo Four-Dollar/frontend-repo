@@ -11,7 +11,7 @@ const Container = styled.div`
 `;
 
 const Price = styled.input`
-	font-size: 32px;
+	font-size: 26px;
 	color: #6f6f6f;
 	font-weight: bold;
 	outline: none;
