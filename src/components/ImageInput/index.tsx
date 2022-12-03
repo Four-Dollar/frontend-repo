@@ -13,8 +13,8 @@ const Container = styled.div`
 `;
 
 const ImagePreviewContainer = styled.div`
-	max-width: 100%;
-	min-width: 100%;
+	max-width: 80%;
+	min-width: 80%;
 	border-radius: 16px;
 	background: #d9d9d9;
 	filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
@@ -26,18 +26,12 @@ const ImagePreview = styled.img`
 	border-radius: 16px;
 `;
 
-const ButtonPrev = styled.div`
-	display: flex;
-	background: #000000;
-	border-radius: 50%;
-	width: 30px;
-	height: 30px;
-	align-items: center;
-	justify-content: center;
-	margin-right: auto;
-`;
+interface PagenationButtonStyleProps {
+	left?: boolean;
+	right?: boolean;
+}
 
-const ButtonNext = styled.div`
+const PagenationButton = styled.div<PagenationButtonStyleProps>`
 	display: flex;
 	background: #000000;
 	border-radius: 50%;
@@ -45,7 +39,12 @@ const ButtonNext = styled.div`
 	height: 30px;
 	align-items: center;
 	justify-content: center;
-	margin-left: auto;
+	margin-right: ${(props) => props.left && 'auto'};
+	margin-left: ${(props) => props.right && 'auto'};
+	cursor: pointer;
+	&:hover {
+		background-color: #242424;
+	}
 `;
 
 const PagenationContainer = styled.div`
@@ -64,6 +63,10 @@ const PagenationImageContainer = styled.div`
 	background-color: #d9d9d9;
 	width: 100px;
 	height: 100px;
+	&:hover {
+		transform: translateY(-5px);
+		transition: all ease-in-out 0.3s;
+	}
 `;
 
 const PagenationImage = styled.img`
@@ -71,12 +74,13 @@ const PagenationImage = styled.img`
 	width: 100px;
 	height: 100px;
 	object-fit: cover;
+	cursor: pointer;
 `;
 
 const UploadContainer = styled.div`
 	display: flex;
 	align-items: center;
-	gap: 8px;
+	gap: 32px;
 `;
 
 const ImageGuide = styled.div`
@@ -97,6 +101,10 @@ const ButtonLabel = styled.label`
 	text-align: center;
 	padding: 16px;
 	height: fit-content;
+	cursor: pointer;
+	&:hover {
+		background-color: #242424;
+	}
 `;
 
 const ButtonInput = styled.input``;
@@ -158,9 +166,9 @@ export function ImageInput() {
 			</ImagePreviewContainer>
 
 			<PagenationContainer>
-				<ButtonPrev onClick={onClickPrev}>
+				<PagenationButton left onClick={onClickPrev}>
 					<LeftArrow />
-				</ButtonPrev>
+				</PagenationButton>
 
 				{imageList?.slice(pageIndex, pageIndex + 3).map((item) => (
 					<PagenationImageContainer key={item}>
@@ -168,9 +176,9 @@ export function ImageInput() {
 					</PagenationImageContainer>
 				))}
 
-				<ButtonNext onClick={onClickNext}>
+				<PagenationButton right onClick={onClickNext}>
 					<RightArrow />
-				</ButtonNext>
+				</PagenationButton>
 			</PagenationContainer>
 
 			<UploadContainer>
