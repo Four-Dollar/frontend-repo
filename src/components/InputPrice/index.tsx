@@ -56,6 +56,36 @@ export const InputPrice = () => {
 		const deadline = listingStore.deadline;
 		const pictures = listingStore.pictures;
 
+		if (userId === 0) {
+			alert('유저 아이디를 입력하세요');
+			return;
+		}
+
+		if (title === '') {
+			alert('제목을 입력하세요');
+			return;
+		}
+
+		if (description === '') {
+			alert('설명을 입력하세요');
+			return;
+		}
+
+		if (deadline === 0) {
+			alert('마감 기한을 입력하세요');
+			return;
+		}
+
+		if (bid === '') {
+			alert('입찰 시작가를 입력하세요');
+			return;
+		}
+
+		if (pictures[0] === undefined) {
+			alert('사진을 최소 1장 업로드 해주세요');
+			return;
+		}
+
 		const formData = new FormData();
 
 		formData.append('user_id', String(userId));

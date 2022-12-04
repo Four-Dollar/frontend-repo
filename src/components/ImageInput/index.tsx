@@ -111,12 +111,11 @@ const ButtonLabel = styled.label`
 const ButtonInput = styled.input``;
 
 export function ImageInput() {
-	const [imageSrc, setImageSrc] = useState('../assets/images/plus-icon');
+	const [imageSrc, setImageSrc] = useState('');
 	const [imageList, setImageList] = useState<string[]>([]);
 	const [pageIndex, setPageIndex] = useState(0);
 	const [pageNum, setPageNum] = useState(1);
 	const MAX_PAGE = Math.ceil(imageList.length / 3);
-	//imageView.length = 3;
 	const [, setImageFileList] = useListingStore((state) => [
 		state.pictures,
 		state.setPictures,
@@ -132,7 +131,6 @@ export function ImageInput() {
 				reader.readAsDataURL(file);
 				reader.onload = (event) => {
 					const source = event.target?.result as string;
-					//const finalResult = Removebg(source);
 					setImageList((prev) => [...prev, source]);
 					setImageFileList(file);
 				};
@@ -163,7 +161,9 @@ export function ImageInput() {
 	};
 
 	const onClickPreview = () => {
-		setTriggerModal(true);
+		if (imageSrc !== '') {
+			setTriggerModal(true);
+		}
 	};
 
 	return (
