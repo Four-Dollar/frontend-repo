@@ -64,9 +64,9 @@ const PagenationImageContainer = styled.div`
 	background-color: #d9d9d9;
 	width: 100px;
 	height: 100px;
+	transition: transform 0.25s ease-in 0s;
 	&:hover {
 		transform: translateY(-5px);
-		transition: all ease-in-out 0.3s;
 	}
 `;
 
@@ -117,7 +117,7 @@ export function ImageInput() {
 	const [pageNum, setPageNum] = useState(1);
 	const MAX_PAGE = Math.ceil(imageList.length / 3);
 	//imageView.length = 3;
-	const [imageFileList, setImageFileList] = useListingStore((state) => [
+	const [, setImageFileList] = useListingStore((state) => [
 		state.pictures,
 		state.setPictures,
 	]);
